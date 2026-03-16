@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Registros Médicos - Veterinaria</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Registros Médicos</h1>
+            <a th:href="@{/dashboard}" class="btn-back">Volver al Dashboard</a>
+        </header>
+
+        <main>
+            <div class="actions">
+                <a th:href="@{/pacientes}" class="btn-primary">Ver Pacientes</a>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Paciente</th>
+                        <th>Fecha Consulta</th>
+                        <th>Diagnóstico</th>
+                        <th>Tratamiento</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="registro : ${registros}">
+                        <td th:text="${registro.id}">1</td>
+                        <td th:text="${registro.nombrePaciente}">Max</td>
+                        <td th:text="${#temporals.format(registro.fechaConsulta, 'dd/MM/yyyy HH:mm')}">15/01/2024 10:30
+                        </td>
+                        <td th:text="${registro.diagnostico}">Diagnóstico</td>
+                        <td th:text="${registro.tratamiento}">Tratamiento</td>
+                        <td>
+                            <a th:href="@{/registros-medicos/paciente/} + ${registro.pacienteId}" class="btn-small">Ver
+                                Detalle</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div th:if="${registros.empty}" class="info">
+                No hay registros médicos.
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

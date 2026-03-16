@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Paciente - Veterinaria</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Registrar Nuevo Paciente</h1>
+            <a th:href="@{/pacientes}" class="btn-back">Volver a la Lista</a>
+        </header>
+
+        <main>
+            <form th:action="@{/pacientes/guardar}" th:object="${paciente}" method="post" class="form">
+                <div class="form-group">
+                    <label for="nombre">Nombre de la mascota:</label>
+                    <input type="text" id="nombre" th:field="*{nombre}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="especie">Especie:</label>
+                    <select id="especie" th:field="*{especie}" required>
+                        <option value="">Seleccione...</option>
+                        <option value="Perro">Perro</option>
+                        <option value="Gato">Gato</option>
+                        <option value="Ave">Ave</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="raza">Raza:</label>
+                    <input type="text" id="raza" th:field="*{raza}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="edad">Edad (años):</label>
+                    <input type="number" id="edad" th:field="*{edad}" required min="0" max="30">
+                </div>
+
+                <div class="form-group">
+                    <label for="dueno">Nombre del dueño:</label>
+                    <input type="text" id="dueno" th:field="*{dueno}" required>
+                </div>
+
+                <button type="submit" class="btn-primary">Guardar Paciente</button>
+            </form>
+        </main>
+    </div>
+</body>
+
+</html>

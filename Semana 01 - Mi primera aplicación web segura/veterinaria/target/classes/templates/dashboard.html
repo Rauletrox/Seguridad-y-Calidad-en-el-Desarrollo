@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Sistema Veterinaria</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Sistema de Gestión Veterinaria</h1>
+            <div class="user-info">
+                <span>Bienvenido, <span sec:authentication="name"></span></span>
+                <a th:href="@{/logout}" class="btn-logout">Cerrar Sesión</a>
+            </div>
+        </header>
+
+        <nav class="main-nav">
+            <ul>
+                <li><a th:href="@{/}">Inicio</a></li>
+                <li><a th:href="@{/pacientes}">Pacientes</a></li>
+                <li><a th:href="@{/citas}">Citas</a></li>
+                <li><a th:href="@{/registros-medicos}">Registros Médicos</a></li>
+                <li><a th:href="@{/facturas}">Facturación</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <h2>Panel Principal</h2>
+
+            <div class="dashboard-cards">
+                <div class="card">
+                    <h3>Pacientes</h3>
+                    <p class="card-number" th:text="${@dataStore.getPacientes().size()}">0</p>
+                    <a th:href="@{/pacientes}" class="btn-card">Ver Pacientes</a>
+                </div>
+
+                <div class="card">
+                    <h3>Citas Programadas</h3>
+                    <p class="card-number" th:text="${@dataStore.getCitas().size()}">0</p>
+                    <a th:href="@{/citas}" class="btn-card">Ver Citas</a>
+                </div>
+
+                <div class="card">
+                    <h3>Registros Médicos</h3>
+                    <p class="card-number" th:text="${@dataStore.getRegistrosMedicos().size()}">0</p>
+                    <a th:href="@{/registros-medicos}" class="btn-card">Ver Registros</a>
+                </div>
+
+                <div class="card">
+                    <h3>Facturas</h3>
+                    <p class="card-number" th:text="${@dataStore.getFacturas().size()}">0</p>
+                    <a th:href="@{/facturas}" class="btn-card">Ver Facturas</a>
+                </div>
+            </div>
+
+            <div class="quick-actions">
+                <h3>Acciones Rápidas</h3>
+                <a th:href="@{/pacientes/nuevo}" class="btn-action">Registrar Nuevo Paciente</a>
+                <a th:href="@{/citas/nueva}" class="btn-action">Programar Nueva Cita</a>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

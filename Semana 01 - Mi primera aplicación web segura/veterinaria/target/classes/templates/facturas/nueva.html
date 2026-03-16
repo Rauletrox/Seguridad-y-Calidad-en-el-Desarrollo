@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Generar Factura - Veterinaria</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Generar Factura</h1>
+            <a th:href="@{/citas}" class="btn-back">Volver a Citas</a>
+        </header>
+
+        <main>
+            <div class="cita-info">
+                <h3>Información de la Cita</h3>
+                <p><strong>Paciente:</strong> <span th:text="${cita.nombrePaciente}">Max</span></p>
+                <p><strong>Fecha:</strong> <span th:text="${cita.fecha}">2024-01-15</span></p>
+                <p><strong>Hora:</strong> <span th:text="${cita.hora}">10:30</span></p>
+                <p><strong>Motivo:</strong> <span th:text="${cita.motivo}">Consulta general</span></p>
+                <p><strong>Veterinario:</strong> <span th:text="${cita.veterinario}">Dr. Pérez</span></p>
+            </div>
+
+            <form th:action="@{/facturas/guardar}" th:object="${factura}" method="post" class="form">
+                <input type="hidden" th:field="*{citaId}" />
+                <input type="hidden" th:field="*{pacienteNombre}" />
+                <input type="hidden" th:field="*{dueno}" />
+
+                <div class="form-group">
+                    <label>Servicios prestados:</label>
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" name="serviciosList" value="Consulta general"> Consulta general -
+                            $25,000
+                        </label>
+                        <label>
+                            <input type="checkbox" name="serviciosList" value="Vacunación"> Vacunación - $25,000
+                        </label>
+                        <label>
+                            <input type="checkbox" name="serviciosList" value="Cirugía"> Cirugía - $25,000
+                        </label>
+                        <label>
+                            <input type="checkbox" name="serviciosList" value="Exámenes de laboratorio"> Exámenes de
+                            laboratorio - $25,000
+                        </label>
+                        <label>
+                            <input type="checkbox" name="serviciosList" value="Hospitalización"> Hospitalización -
+                            $25,000
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Medicamentos administrados:</label>
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" name="medicamentosList" value="Antibiótico"> Antibiótico - $5,000
+                        </label>
+                        <label>
+                            <input type="checkbox" name="medicamentosList" value="Antiinflamatorio"> Antiinflamatorio -
+                            $5,000
+                        </label>
+                        <label>
+                            <input type="checkbox" name="medicamentosList" value="Analgésico"> Analgésico - $5,000
+                        </label>
+                        <label>
+                            <input type="checkbox" name="medicamentosList" value="Vitaminas"> Vitaminas - $5,000
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary">Generar Factura</button>
+            </form>
+        </main>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Historial Médico - Veterinaria</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1 th:text="'Historial Médico de ' + ${paciente.nombre}">Historial Médico</h1>
+            <a th:href="@{/pacientes}" class="btn-back">Volver a Pacientes</a>
+        </header>
+
+        <main>
+            <div class="actions">
+                <a th:href="@{/registros-medicos/nuevo/} + ${paciente.id}" class="btn-primary">Nuevo Registro Médico</a>
+            </div>
+
+            <div class="paciente-info">
+                <h3>Información del Paciente</h3>
+                <p><strong>Nombre:</strong> <span th:text="${paciente.nombre}">Max</span></p>
+                <p><strong>Especie:</strong> <span th:text="${paciente.especie}">Perro</span></p>
+                <p><strong>Raza:</strong> <span th:text="${paciente.raza}">Labrador</span></p>
+                <p><strong>Edad:</strong> <span th:text="${paciente.edad}">5</span> años</p>
+                <p><strong>Dueño:</strong> <span th:text="${paciente.dueno}">Carlos</span></p>
+            </div>
+
+            <h3>Registros Médicos</h3>
+
+            <div th:each="registro : ${registros}" class="registro-card">
+                <div class="registro-header">
+                    <strong>Fecha:</strong> <span
+                        th:text="${#temporals.format(registro.fechaConsulta, 'dd/MM/yyyy HH:mm')}">15/01/2024
+                        10:30</span>
+                </div>
+                <div class="registro-body">
+                    <p><strong>Diagnóstico:</strong> <span th:text="${registro.diagnostico}">Diagnóstico</span></p>
+                    <p><strong>Tratamiento:</strong> <span th:text="${registro.tratamiento}">Tratamiento</span></p>
+                    <p><strong>Medicamentos:</strong> <span th:text="${registro.medicamentos}">Medicamentos</span></p>
+                    <p><strong>Notas:</strong> <span th:text="${registro.notas}">Notas adicionales</span></p>
+                </div>
+            </div>
+
+            <div th:if="${registros.empty}" class="info">
+                No hay registros médicos para este paciente.
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

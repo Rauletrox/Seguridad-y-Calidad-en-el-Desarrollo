@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Facturación - Veterinaria</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Facturación</h1>
+            <a th:href="@{/dashboard}" class="btn-back">Volver al Dashboard</a>
+        </header>
+
+        <main>
+            <div class="actions">
+                <a th:href="@{/citas}" class="btn-primary">Ver Citas para Facturar</a>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>N° Factura</th>
+                        <th>Paciente</th>
+                        <th>Dueño</th>
+                        <th>Fecha Emisión</th>
+                        <th>Total</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="factura : ${facturas}">
+                        <td th:text="${factura.id}">1</td>
+                        <td th:text="${factura.pacienteNombre}">Poli Polin</td>
+                        <td th:text="${factura.dueno}">Cecilia Moyano</td>
+                        <td th:text="${#temporals.format(factura.fechaEmision, 'dd/MM/yyyy HH:mm')}">15/01/2024 10:30
+                        </td>
+                        <td th:text="'$' + ${#numbers.formatDecimal(factura.total, 0, 'COMMA', 0, 'POINT')}">$25,000
+                        </td>
+                        <td>
+                            <a th:href="@{/facturas/ver/} + ${factura.id}" class="btn-small">Ver Factura</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div th:if="${facturas.empty}" class="info">
+                No hay facturas generadas.
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

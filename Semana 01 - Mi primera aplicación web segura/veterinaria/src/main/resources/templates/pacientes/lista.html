@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Pacientes - Veterinaria</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Lista de Pacientes</h1>
+            <a th:href="@{/dashboard}" class="btn-back">Volver al Dashboard</a>
+        </header>
+
+        <main>
+            <div class="actions">
+                <a th:href="@{/pacientes/nuevo}" class="btn-primary">Registrar Nuevo Paciente</a>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre de la mascota</th>
+                        <th>Especie</th>
+                        <th>Raza</th>
+                        <th>Edad</th>
+                        <th>Nombre del Dueño</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="paciente : ${pacientes}">
+                        <td th:text="${paciente.id}">1</td>
+                        <td th:text="${paciente.nombre}">Poli Polin</td>
+                        <td th:text="${paciente.especie}">Perro</td>
+                        <td th:text="${paciente.raza}">Chiguagua</td>
+                        <td th:text="${paciente.edad}">2</td>
+                        <td th:text="${paciente.dueno}">Cecilia Moyano</td>
+                        <td>
+                            <a th:href="@{/registros-medicos/paciente/} + ${paciente.id}" class="btn-small">Ver
+                                Registros</a>
+                            <a th:href="@{/registros-medicos/nuevo/} + ${paciente.id}" class="btn-small">Nuevo
+                                Registro</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+    </div>
+</body>
+
+</html>

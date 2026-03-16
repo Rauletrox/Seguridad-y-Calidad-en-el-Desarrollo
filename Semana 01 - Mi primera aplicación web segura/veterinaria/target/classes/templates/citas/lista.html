@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Citas - Veterinaria</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Citas Programadas</h1>
+            <a th:href="@{/dashboard}" class="btn-back">Volver al Dashboard</a>
+        </header>
+
+        <main>
+            <div class="actions">
+                <a th:href="@{/citas/nueva}" class="btn-primary">Programar Nueva Cita</a>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Paciente</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Motivo</th>
+                        <th>Veterinario</th>
+                        <th>Ver Factura</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="cita : ${citas}">
+                        <td th:text="${cita.id}">1</td>
+                        <td th:text="${cita.nombrePaciente}">Poli Polin</td>
+                        <td th:text="${cita.fecha}">2024-01-15</td>
+                        <td th:text="${cita.hora}">10:30</td>
+                        <td th:text="${cita.motivo}">Consulta general</td>
+                        <td th:text="${cita.veterinario}">Dr. Pérez</td>
+                        <td><a th:href="@{/facturas/nueva/} + ${cita.id}" class="btn-small btn-success">Facturar</a>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+    </div>
+</body>
+
+</html>
